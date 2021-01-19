@@ -14,6 +14,6 @@ before_script:
     - while ! ((docker logs wp-headless) | grep 'You can now log in'); do sleep 10; done # wait for wordpress install
 
 script:
-    - curl localhost:3000 | grep 'Congratulations!'
-    - curl localhost:3001 | grep 'WordPress + React'
+    - curl companyjuice.com:3000 | grep 'Congratulations!'
+    - curl companyjuice.com:3001 | grep 'WordPress + React'
     - docker exec -w /var/www/html/wp-content/themes/postlight-headless-wp wp-headless phpcs -v .

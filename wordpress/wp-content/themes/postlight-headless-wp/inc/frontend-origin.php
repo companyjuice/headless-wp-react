@@ -10,8 +10,8 @@
  *
  * @TODO Determine the headless client's URL based on the current environment.
  *
- * @return str Frontend origin URL, i.e., http://localhost:3000.
+ * @return str Frontend origin URL, i.e., http://companyjuice.com:3000.
  */
 function get_frontend_origin() {
-    return 'http://localhost:3000';
+    return 'http://companyjuice.com:3000';
 }

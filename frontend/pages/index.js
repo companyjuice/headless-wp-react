@@ -237,7 +237,7 @@ class Index extends Component {
               Our developers specialize in JavaScript, React, WordPress + SQL for REST APIs + GraphQL.
               Our marketers specialize in SEO, Social Media, Lead Generation, + Sales Fulfillment.
               <div className="api-toggle">
-                <a className="rest" href="http://localhost:3000/page/contact">CONTACT US</a>
+                <a className="rest" href="http://companyjuice.com:3000/page/contact">CONTACT US</a>
                 <a className="graphql" href="https://companyjuice.freshdesk.com/support/home" target="_blank">KNOWLEDGEBASE</a>
               </div>
             </div>
