@@ -46,7 +46,7 @@ const Layout = props => {
   }
   return (
     <GoogleReCaptchaProvider
-      reCaptchaKey="6LeleS0aAAAAAPY9sbnaVxLOrhn4sH-7cxZXnJLW" // "[Your recaptcha key]"
+      reCaptchaKey="6LcYuTgaAAAAAG3nXK1gSyTc3ACUzlWNtNtTuM6t" // "[Your recaptcha key]"
       // language="[optional_language]"
       // useRecaptchaNet="[optional_boolean_value]"
       // scriptProps={{

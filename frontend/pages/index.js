@@ -43,9 +43,9 @@ class Index extends Component {
           .then(data => {
             return data[0];
           }),
-        wp.posts().perPage( 12 ).page( 1 ).embed(),
-        wp.pages().perPage( 13 ).page( 1 ).embed(),
-        wp.types().type('portfolio').perPage( 21 ).page( 1 ).embed(),
+        wp.posts().perPage( 15 ).page( 1 ).embed(),
+        wp.pages().perPage( 17 ).page( 1 ).embed(),
+        wp.types().type('portfolio').perPage( 15 ).page( 1 ).embed(),
       ]);
 
       return { page, posts, pages, portfolios };
@@ -107,9 +107,10 @@ class Index extends Component {
         // console.log("ipost-------------");
         // console.log(ipost);
         // console.log("------------------");
-        if (ipost._embedded['wp:featuredmedia']
-         && ipost._embedded['wp:featuredmedia']['0'].source_url) {
-          imageSrc = ipost._embedded['wp:featuredmedia']['0'].source_url;
+        if (ipost._embedded 
+         && ipost._embedded['wp:featuredmedia']
+         && ipost._embedded['wp:featuredmedia'][0].source_url) {
+          imageSrc = ipost._embedded['wp:featuredmedia'][0].source_url;
         }
         return (
           <ul key={ipost.slug}>
@@ -137,16 +138,17 @@ class Index extends Component {
     });
     const fpages = pages.map(ipage => {
       if (ipage.slug !== 'welcome' 
-       && ipage.slug !== 'privacy-policy'
+       && ipage.slug !== 'privacy'
        && ipage.slug !== 'contact'
        && ipage.slug !== 'terms-conditions') {
         // console.log("------------------");
         // console.log("ipage-------------");
         // console.log(ipage);
         // console.log("------------------");
-        if (ipage._embedded['wp:featuredmedia']
-         && ipage._embedded['wp:featuredmedia']['0'].source_url) {
-          imageSrc = ipage._embedded['wp:featuredmedia']['0'].source_url;
+        if (ipage._embedded 
+         && ipage._embedded['wp:featuredmedia']
+         && ipage._embedded['wp:featuredmedia'][0].source_url) {
+          imageSrc = ipage._embedded['wp:featuredmedia'][0].source_url;
         }
         return (
           <ul key={ipage.slug}>
@@ -180,9 +182,10 @@ class Index extends Component {
         // console.log("iportfolio-------------");
         // console.log(iportfolio);
         // console.log("------------------");
-        if (iportfolio._embedded['wp:featuredmedia']
-         && iportfolio._embedded['wp:featuredmedia']['0'].source_url) {
-          imageSrc = iportfolio._embedded['wp:featuredmedia']['0'].source_url;
+        if (iportfolio._embedded 
+         && iportfolio._embedded['wp:featuredmedia']
+         && iportfolio._embedded['wp:featuredmedia'][0].source_url) {
+          imageSrc = iportfolio._embedded['wp:featuredmedia'][0].source_url;
         }
         return (
           <div className="fl w-third-l" style={{height: '280px'}}>
