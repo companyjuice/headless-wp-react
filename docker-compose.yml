@@ -37,7 +37,7 @@ services:
         image: node
         ports:
             - '3000:3000'
-        user: node
+        user: root
         volumes:
             - ./frontend:/home/node/app
         working_dir: /home/node/app
@@ -49,7 +49,7 @@ services:
         image: node
         ports:
             - '3001:3001'
-        user: node
+        user: root
         volumes:
             - ./frontend-graphql:/home/node/app
         working_dir: /home/node/app
