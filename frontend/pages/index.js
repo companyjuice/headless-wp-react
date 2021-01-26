@@ -85,7 +85,8 @@ class Index extends Component {
       //return;
     }
 
-    let imageSrc = "/static/images/wordpress-plus-react-header.png";
+    const imageDef = "/static/images/wordpress-plus-react-header.png";
+    let imageSrc = imageDef;
 
     const var1 = "hey hey hey";
     const var2 = "yo yo yo";
@@ -111,6 +112,9 @@ class Index extends Component {
          && ipost._embedded['wp:featuredmedia']
          && ipost._embedded['wp:featuredmedia'][0].source_url) {
           imageSrc = ipost._embedded['wp:featuredmedia'][0].source_url;
+        }
+        else {
+          imageSrc = imageDef;
         }
         return (
           <ul key={ipost.slug}>
@@ -150,6 +154,9 @@ class Index extends Component {
          && ipage._embedded['wp:featuredmedia'][0].source_url) {
           imageSrc = ipage._embedded['wp:featuredmedia'][0].source_url;
         }
+        else {
+          imageSrc = imageDef;
+        }
         return (
           <ul key={ipage.slug}>
             <li className="fl w-100">
@@ -186,6 +193,9 @@ class Index extends Component {
          && iportfolio._embedded['wp:featuredmedia']
          && iportfolio._embedded['wp:featuredmedia'][0].source_url) {
           imageSrc = iportfolio._embedded['wp:featuredmedia'][0].source_url;
+        }
+        else {
+          imageSrc = imageDef;
         }
         return (
           <div className="fl w-third-l" style={{height: '280px'}}>
