@@ -14,3 +14,7 @@
 /wp-content/index.php
 /wp-content/debug.log
 /wp-content/uploads/**
+# MM
+/wp-content/plugins.zip
+/wp-content/uploads.zip
+/wp-content/themes/twentytwentyone/*
