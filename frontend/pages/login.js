@@ -6,6 +6,9 @@ import PageWrapper from '../components/PageWrapper';
 import Menu from '../components/Menu';
 import Config from '../config';
 
+import {Helmet} from "react-helmet";
+import parse from 'html-react-parser';
+
 class Login extends Component {
   state = {
     username: '',
@@ -43,13 +46,19 @@ class Login extends Component {
     const { username, password, message } = this.state;
     const { headerMenu } = this.props;
 
+    const metaDescription = "Log in to Company Juice";
+
     return (
       <Layout>
+        <Helmet>
+          <title>Log in | Company Juice</title>
+          {/*<link rel="canonical" href="https://companyjuice.com/" />*/}
+          <meta name="description" content={metaDescription} />
+        </Helmet>
         <Menu menu={headerMenu} />
         <div className="content login mh4 mv4 w-two-thirds-l center-l">
           <div>
             <h1>Log in</h1>
-            <p>Starter Kit allows you to log in via the JavaScript frontend, meaning you can interact with the backend without gaining admin access.</p>
             <p><strong>Log in to view hidden posts only available to authenticated users.</strong></p>
             <p className="message mb3"><strong>{message}</strong></p>
             <form onSubmit={(e) => {this.login(); e.preventDefault()}}>

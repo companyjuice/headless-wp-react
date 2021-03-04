@@ -10,6 +10,9 @@ import PageWrapper from '../components/PageWrapper'
 import Menu from '../components/Menu'
 import Config from '../config'
 
+import {Helmet} from "react-helmet";
+import parse from 'html-react-parser';
+
 const wp = new WPAPI({ endpoint: Config.apiUrl })
 
 /** START COMPONENT CLASS */
@@ -27,7 +30,7 @@ class Contact extends Component {
     inputs_message: '',
     recaptcha_token: '',
   }
-  
+
   static async getInitialProps(context) {
     //const { slug } = context.query
 
@@ -122,8 +125,15 @@ class Contact extends Component {
     const { contactPage, headerMenu } = this.props
     if (contactPage.length === 0) return <Error statusCode={404} />
 
+    const metaDescription = parse(contactPage.excerpt.rendered)[0].props.children;
+
     return (
       <Layout>
+        <Helmet>
+          <title>{parse(contactPage.title.rendered)} | Company Juice</title>
+          {/*<link rel="canonical" href="https://companyjuice.com/" />*/}
+          <meta name="description" content={metaDescription} />
+        </Helmet>
         <Menu menu={headerMenu} />
         <div className="content login mh4 mv4 w-two-thirds-l center-l">
           <div>

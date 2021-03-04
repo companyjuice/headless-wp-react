@@ -35,7 +35,7 @@ class Menu extends Component {
       <div className="menu bb">
         <div className="flex justify-between w-90-l center-l">
           <div className="brand bb flex justify-center items-center w-100 justify-between-l bn-l">
-            <Link href="/">
+            <Link href="/?ref=header">
               <a className="starter-kit-logo">
                 <Logo width={210} height={50}/>
                 <div className="pl2" style={{display: 'none'}}>

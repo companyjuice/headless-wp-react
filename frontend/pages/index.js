@@ -8,7 +8,7 @@ import Menu from '../components/Menu';
 import Config from '../config';
 import Logo from '../static/images/company_juice_logo_lime_straw_large_v002_512x512.svg';
 
-import WPShortcodes from '../src/js/WPShortcodes';
+//import WPShortcodes from '../src/js/WPShortcodes';
 
 import Card from '../src/js/tachyons-styled-react-master/src/components/Card';
 import {Article, Div, Section, P, H3, H4, Img, A} from '../src/js/tachyons-styled-react-master/src/elements';
@@ -45,7 +45,7 @@ class Index extends Component {
           }),
         wp.posts().perPage( 15 ).page( 1 ).embed(),
         wp.pages().perPage( 17 ).page( 1 ).embed(),
-        wp.types().type('portfolio').perPage( 15 ).page( 1 ).embed(),
+        wp.types().type('portfolio').perPage( 18 ).page( 1 ).embed(),
       ]);
 
       return { page, posts, pages, portfolios };
@@ -88,18 +88,20 @@ class Index extends Component {
     const imageDef = "/static/images/wordpress-plus-react-header.png";
     let imageSrc = imageDef;
 
-    const var1 = "hey hey hey";
-    const var2 = "yo yo yo";
-    const shortcodes = WPShortcodes( `[myshortcode var1="${var1}" var2="${var2}"]`, functionMapShortcodes );
+    //const var1 = "hey hey hey";
+    //const var2 = "yo yo yo";
+    //const shortcodes = WPShortcodes( `[myshortcode var1="${var1}" var2="${var2}"]`, functionMapShortcodes );
+    /*
     console.log("---------------------");
     console.log("shortcodes");
-    console.log(shortcodes);
+    console.log( shortcodes );
     console.log("---------------------");
     console.log("---------------------");
     console.log("functionMapShortcodes");
-    console.log(functionMapShortcodes);
+    console.log( functionMapShortcodes );
     console.log("---------------------");
-    
+    */
+
     const fposts = posts.map(ipost => {
       if (ipost.slug !== 'hey' 
        && ipost.slug !== 'hey'
@@ -111,7 +113,10 @@ class Index extends Component {
         if (ipost._embedded 
          && ipost._embedded['wp:featuredmedia']
          && ipost._embedded['wp:featuredmedia'][0].source_url) {
-          imageSrc = ipost._embedded['wp:featuredmedia'][0].source_url;
+          imageSrc = ipost._embedded['wp:featuredmedia'][0].source_url
+                     //.replace(/^http:\/\//i, 'https://')
+                     //.replace(':8080/wp-content', '/static');
+		     .replace('.com:8080', '.net');
         }
         else {
           imageSrc = imageDef;
@@ -120,12 +125,9 @@ class Index extends Component {
           <ul key={ipost.slug}>
             <li className="fl w-100">
               <div className="fl w-third">
-                <Link
-                  as={`/post/${ipost.slug}`}
-                  href={`/post?slug=${ipost.slug}&apiRoute=post`}
-                >
+                <A href={`/post/${ipost.slug}`} title={ipost.title.rendered} >
                   <img src={imageSrc} />
-                </Link>
+                </A>
               </div>
               <div className="fl w-two-thirds pl3">
                 <Link
@@ -152,7 +154,10 @@ class Index extends Component {
         if (ipage._embedded 
          && ipage._embedded['wp:featuredmedia']
          && ipage._embedded['wp:featuredmedia'][0].source_url) {
-          imageSrc = ipage._embedded['wp:featuredmedia'][0].source_url;
+          imageSrc = ipage._embedded['wp:featuredmedia'][0].source_url
+                     //.replace(/^http:\/\//i, 'https://')
+                     //.replace(':8080/wp-content', '/static');
+		     .replace('.com:8080', '.net');
         }
         else {
           imageSrc = imageDef;
@@ -161,12 +166,9 @@ class Index extends Component {
           <ul key={ipage.slug}>
             <li className="fl w-100">
               <div className="fl w-third">
-                <Link
-                  as={`/page/${ipage.slug}`}
-                  href={`/post?slug=${ipage.slug}&apiRoute=page`}
-                >
+                <A href={`/page/${ipage.slug}`} title={ipage.title.rendered} >
                   <img src={imageSrc} />
-                </Link>
+                </A>
               </div>
               <div className="fl w-two-thirds pl3">
                 <Link
@@ -192,13 +194,16 @@ class Index extends Component {
         if (iportfolio._embedded 
          && iportfolio._embedded['wp:featuredmedia']
          && iportfolio._embedded['wp:featuredmedia'][0].source_url) {
-          imageSrc = iportfolio._embedded['wp:featuredmedia'][0].source_url;
+          imageSrc = iportfolio._embedded['wp:featuredmedia'][0].source_url
+                     //.replace(/^http:\/\//i, 'https://')
+                     //.replace(':8080/wp-content', '/static');
+		     .replace('.com:8080', '.net');
         }
         else {
           imageSrc = imageDef;
         }
         return (
-          <div className="fl w-third-l" style={{height: '280px'}}>
+          <div className="fl w-third-l" style={{height: '300px'}}>
             <Article overflow='hidden' 
               borderRadius={2} border='0px solid' borderColor='silver' 
               px={2} py={3}>
@@ -207,12 +212,9 @@ class Index extends Component {
                   borderRadius={1} bg='black-80' color='white' fontSize={0}>
                   <P my={0} lineHeight='1.0'>{/*Category Label*/}</P>
                 </Div>
-                <Link
-                  as={`/portfolio/${iportfolio.slug}`}
-                  href={`/post?slug=${iportfolio.slug}&apiRoute=portfolio`}
-                >
-                  <Img src={imageSrc} />
-                </Link>
+                <A href={`/portfolio/${iportfolio.slug}`} title={iportfolio.title.rendered} >
+                  <Img src={imageSrc} alt={iportfolio.title.rendered} />
+                </A>
               </Div>
               <Div px={[1,2]} py={[1,2]}>
                 <H3 fontSize={3} mt={0} mb={1}
@@ -250,7 +252,7 @@ class Index extends Component {
               Our developers specialize in JavaScript, React, WordPress + SQL for REST APIs + GraphQL.
               Our marketers specialize in SEO, Social Media, Lead Generation, + Sales Fulfillment.
               <div className="api-toggle">
-                <a className="rest" href="http://companyjuice.com:3000/page/contact">CONTACT US</a>
+                <a className="rest" href="https://companyjuice.com/contact">CONTACT US</a>
                 <a className="graphql" href="https://companyjuice.freshdesk.com/support/home" target="_blank">KNOWLEDGEBASE</a>
               </div>
             </div>

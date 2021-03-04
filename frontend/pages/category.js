@@ -8,6 +8,9 @@ import PageWrapper from '../components/PageWrapper';
 import Menu from '../components/Menu';
 import Config from '../config';
 
+import {Helmet} from "react-helmet";
+import parse from 'html-react-parser';
+
 const wp = new WPAPI({ endpoint: Config.apiUrl });
 
 class Category extends Component {
@@ -63,8 +66,17 @@ class Category extends Component {
         </div>
       );
     });
+
+    //console.log(categories[0]);
+    const metaDescription = categories[0].description;
+
     return (
       <Layout>
+        <Helmet>
+          <title>{parse(categories[0].name)} | Company Juice</title>
+          {/*<link rel="canonical" href="https://companyjuice.com/" />*/}
+          <meta name="description" content={metaDescription} />
+        </Helmet>
         <Menu menu={headerMenu} />
         <div className="content mh4 mt4 mb6 w-two-thirds-l center-l">
           <span className="gray f3 b">Category Archives:</span>

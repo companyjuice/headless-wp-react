@@ -13,5 +13,5 @@
  * @return str Frontend origin URL, i.e., http://companyjuice.com:3000.
  */
 function get_frontend_origin() {
-    return 'http://companyjuice.com:3000';
+    return 'https://companyjuice.com';
 }

@@ -8,6 +8,9 @@ import Menu from '../components/Menu';
 import WPAPI from 'wpapi';
 import Config from '../config';
 
+import {Helmet} from "react-helmet";
+import parse from 'html-react-parser';
+
 const wp = new WPAPI({ endpoint: Config.apiUrl });
 
 class Search extends Component {
@@ -32,8 +35,15 @@ class Search extends Component {
     const { posts } = this.state;
     const { headerMenu } = this.props;
 
+    const metaDescription = "Search the Company Juice website";
+
     return (
       <Layout>
+        <Helmet>
+          <title>Search | Company Juice</title>
+          {/*<link rel="canonical" href="https://companyjuice.com/" />*/}
+          <meta name="description" content={metaDescription} />
+        </Helmet>
         <Menu menu={headerMenu} />
         <div className="content login mh4 mv4 w-two-thirds-l center-l">
           <div>

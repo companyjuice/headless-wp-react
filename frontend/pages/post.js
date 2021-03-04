@@ -10,8 +10,10 @@ import Config from '../config';
 
 import {Div, H1} from '../src/js/tachyons-styled-react-master/src/elements';
 
+import {Helmet} from "react-helmet";
+import parse from 'html-react-parser';
 
-// "@wordpress/components": "^12.0.1",   
+// "@wordpress/components": "^12.0.1",
 // import { Button } from '@wordpress/components';
 
 // const Example = () => (
@@ -57,27 +59,44 @@ class Post extends Component {
 
     const { post, headerMenu } = this.props;
 
+    /* */
     console.log("------------------");
     console.log("post--------------");
     console.log(post);
     console.log("------------------");
+    /*
     console.log("headerMenu--------");
     console.log(headerMenu);
     console.log("------------------");
+    */
 
     if (!post.title) {
       return <Error statusCode={404} />;
     }
+
+    // SET TITLE
+    //document.title = post.title.rendered;
 
     const heroUrl = (
       post._embedded &&
       post._embedded['wp:featuredmedia'] &&
       post._embedded['wp:featuredmedia'][0] &&
       post._embedded['wp:featuredmedia'][0].source_url
-    ) ? post._embedded['wp:featuredmedia'][0].source_url : false;
+    ) ? post._embedded['wp:featuredmedia'][0].source_url
+            //.replace(/^http:\/\//i, 'https://')
+            //.replace(':8080/wp-content', '/static')
+	    .replace('.com:8080', '.net')
+      : false;
+
+    const metaDescription = parse(post.excerpt.rendered)[0].props.children;
 
     return (
       <Layout className="test">
+        <Helmet>
+          <title>{parse(post.title.rendered)} | Company Juice</title>
+          {/*<link rel="canonical" href="https://companyjuice.com/" />*/}
+          <meta name="description" content={metaDescription} />
+        </Helmet>
         <Menu menu={headerMenu} />
         {heroUrl ? (
           <div className={`hero flex items-center post-type-${post.type}`}>
@@ -88,7 +107,7 @@ class Post extends Component {
           </div>
         ) : ''}
         <div className={`content mh4 mv4 w-two-thirds-l center-l post-${post.id} post-type-${post.type}`}>
-          <h1>{post.title.rendered}</h1>
+          <h1>{parse(post.title.rendered)}</h1>
           {/*<Example />*/}
           {/*<WPGBlocks blocks={post.blocks} />*/}
           <div
